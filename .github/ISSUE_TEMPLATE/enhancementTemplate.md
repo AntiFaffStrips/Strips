@@ -1,6 +1,10 @@
+# Problem Statement
+
+< A simple sentance describing the changes to be made in this issue
+
 # Summary of Issue/Change
 
-< Give a basic summary of the changes for this issue >
+< Give a more detailed summary of the changes for this issue >
   
 # Files effected
 
