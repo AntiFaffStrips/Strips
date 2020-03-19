@@ -1,6 +1,6 @@
 # Problem Statement
 
-< A simple sentance describing the changes to be made in this issue
+< A simple sentance describing the changes to be made in this issue >
 
 # Summary of Issue/Change
 
