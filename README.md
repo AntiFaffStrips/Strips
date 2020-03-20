@@ -26,3 +26,24 @@ The solution will:
 * Allow controller to choose paper or electronic mode:
   * In electronic mode, strips can be manipulated. Data will be transferred back to Euroscope, as if the controller was controlling normally. Functionality essentially copying vStrips
   * In paper mode, strips are printed once generated
+
+
+## To Do:
+
+### Euroscope side
+- [ ] Create blank DLL project and add ES interface (using plug in development guide - DON'T FORGET PLIGIN TYPO!)
+- [ ] Identify controller ICAO and position
+- [ ] On load (or command), identify all relevant flight plans
+- [ ] Continuously identify all new relevant flight plans
+- [ ] Extract relevant data for each flight plan and store locally
+- [ ] Implement methods to edit the datablock values (as if controller were doing it)
+
+### Middle
+- [ ] Decide how best to create middle
+- [ ] Work out how to emulate vStrips
+- [ ] Format and print paper flight strips
+
+### UI side
+- [ ] Create basic UI (decide how to do)
+- [ ] Add paper mode functionality
+- [ ] Add electronic mode functionality
