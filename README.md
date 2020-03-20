@@ -16,6 +16,7 @@ VATSIM Flight Progress Strip Simulation
 * Electronic strips retain and share data with other controllers (like vStrips does)
 * Paper strips can be generated and printed - after that, manipulation and storage happens locally to controller, so can be ignored by solution
 * Potential for different (automatically detected) strip board layouts based on controller position
+* Potential for remote PC to control paper strips (could this be expanded to tablets?)
 
 ### Success Criteria
 The solution will:
