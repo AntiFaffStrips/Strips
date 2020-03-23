@@ -47,3 +47,6 @@ The solution will:
 - [ ] Create basic UI (decide how to do)
 - [ ] Add paper mode functionality
 - [ ] Add electronic mode functionality
+
+## Contributing
+As you will already know this is a private repository but if you are new and would like to contribute then please read the [contributing guide](https://github.com/JonathanFerguson1/Strips/blob/master/.github/Contribution%20Guide.md) first
