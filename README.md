@@ -33,7 +33,7 @@ The solution will:
 ### Euroscope side
 - [ ] Create blank DLL project and add ES interface (using plug in development guide - DON'T FORGET PLIGIN TYPO!)
 - [ ] Identify controller ICAO and position
-- [ ] On load (or command), identify all relevant flight plans
+- [ ] On load (or command), identify all relevant flight plans and their current states
 - [ ] Continuously identify all new relevant flight plans
 - [ ] Extract relevant data for each flight plan and store locally
 - [ ] Implement methods to edit the datablock values (as if controller were doing it)
