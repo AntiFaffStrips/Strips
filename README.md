@@ -33,7 +33,7 @@ The solution will:
 ### Euroscope side
 - [ ] Create blank DLL project and add ES interface (using plug in development guide - DON'T FORGET PLIGIN TYPO!)
 - [ ] Identify controller ICAO and position
-- [ ] On load (or command), identify all relevant flight plans
+- [ ] On load (or command), identify all relevant flight plans and their current states
 - [ ] Continuously identify all new relevant flight plans
 - [ ] Extract relevant data for each flight plan and store locally
 - [ ] Implement methods to edit the datablock values (as if controller were doing it)
@@ -47,3 +47,6 @@ The solution will:
 - [ ] Create basic UI (decide how to do)
 - [ ] Add paper mode functionality
 - [ ] Add electronic mode functionality
+
+## Contributing
+As you will already know this is a private repository but if you are new and would like to contribute then please read the [contributing guide](https://github.com/JonathanFerguson1/Strips/blob/master/.github/Contribution%20Guide.md) first
