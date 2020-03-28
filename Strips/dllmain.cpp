@@ -1,5 +1,7 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
+#include "EuroScopePlugIn.h"
+#include "CEuroScopeUtils.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
@@ -17,3 +19,16 @@ BOOL APIENTRY DllMain( HMODULE hModule,
     return TRUE;
 }
 
+CEuroScopeUtils* pMyPlugIn = NULL;
+    
+void __declspec (dllexport) EuroScopePlugInInit(EuroScopePlugIn::CPlugIn** ppPlugInInstance)
+{
+    // allocate 
+    *ppPlugInInstance = pMyPlugIn =
+        new CEuroScopeUtils;
+}
+
+void __declspec (dllexport) EuroScopePlugInExit(void)
+{
+    delete pMyPlugIn;
+}

@@ -21,10 +21,10 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="lib\include\EuroScopePlugIn.h">
+    <ClInclude Include="CEuroScopeUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CEuroScopeUtils.h">
+    <ClInclude Include="lib\include\EuroScopePlugIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

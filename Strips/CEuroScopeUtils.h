@@ -1,7 +1,10 @@
 #pragma once
-#include <EuroScopePlugIn.h>
+#include "EuroScopePlugIn.h"
 
-class CEuroScopeUtils
+class CEuroScopeUtils :
+	public EuroScopePlugIn::CPlugIn
 {
+public:
+	CEuroScopeUtils(void);
 };
 
