@@ -1,10 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Strips",
-    "\\Strips\\lib",
-    "\\Strips\\lib\\include"
+    "\\Strips"
   ],
-  "SelectedNode": "\\Strips\\lib\\include\\EuroScopePlugIn.h",
+  "SelectedNode": "\\Strips\\Strips.sln",
   "PreviewInSolutionExplorer": false
 }
