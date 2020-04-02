@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Strips"
+    "\\Strips",
+    "\\Strips\\lib"
   ],
-  "SelectedNode": "\\Strips\\dllmain.cpp",
+  "SelectedNode": "\\Strips\\Strips.sln",
   "PreviewInSolutionExplorer": false
 }

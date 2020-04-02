@@ -1,6 +1,5 @@
 // dllmain.cpp : Defines the entry point for the DLL application.
 #include "pch.h"
-#include "EuroScopePlugIn.h"
 #include "CEuroScopeUtils.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,

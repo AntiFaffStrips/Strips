@@ -161,7 +161,6 @@
   <ItemGroup>
     <ClInclude Include="CEuroScopeUtils.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="lib\include\EuroScopePlugIn.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>

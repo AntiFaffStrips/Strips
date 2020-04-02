@@ -1,5 +1,5 @@
-﻿  CEuroScopeUtils.cpp
-     Creating library D:\Users\JAF\OneDrive\Documents\repos\Strips\Strips\x64\Debug\Strips.lib and object D:\Users\JAF\OneDrive\Documents\repos\Strips\Strips\x64\Debug\Strips.exp
+﻿  dllmain.cpp
+     Creating library D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\x64\Debug\Strips.lib and object D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\x64\Debug\Strips.exp
 CEuroScopeUtils.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __cdecl EuroScopePlugIn::CPlugIn::CPlugIn(int,char const *,char const *,char const *,char const *)" (__imp_??0CPlugIn@EuroScopePlugIn@@QEAA@HPEBD000@Z) referenced in function "public: __cdecl CEuroScopeUtils::CEuroScopeUtils(void)" (??0CEuroScopeUtils@@QEAA@XZ)
 CEuroScopeUtils.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __cdecl EuroScopePlugIn::CPlugIn::~CPlugIn(void)" (__imp_??1CPlugIn@EuroScopePlugIn@@UEAA@XZ) referenced in function "public: virtual __cdecl CEuroScopeUtils::~CEuroScopeUtils(void)" (??1CEuroScopeUtils@@UEAA@XZ)
 CEuroScopeUtils.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl EuroScopePlugIn::CPlugIn::OnAirportRunwayActivityChanged(void)" (?OnAirportRunwayActivityChanged@CPlugIn@EuroScopePlugIn@@UEAAXXZ)
@@ -25,4 +25,4 @@ CEuroScopeUtils.obj : error LNK2001: unresolved external symbol "public: virtual
 CEuroScopeUtils.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl EuroScopePlugIn::CPlugIn::OnVoiceTransmitEnded(bool)" (?OnVoiceTransmitEnded@CPlugIn@EuroScopePlugIn@@UEAAX_N@Z)
 CEuroScopeUtils.obj : error LNK2001: unresolved external symbol "public: virtual void __cdecl EuroScopePlugIn::CPlugIn::OnVoiceTransmitStarted(bool)" (?OnVoiceTransmitStarted@CPlugIn@EuroScopePlugIn@@UEAAX_N@Z)
 lib\EuroScopePlugInDll.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-D:\Users\JAF\OneDrive\Documents\repos\Strips\Strips\x64\Debug\Strips.dll : fatal error LNK1120: 24 unresolved externals
+D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\x64\Debug\Strips.dll : fatal error LNK1120: 24 unresolved externals
