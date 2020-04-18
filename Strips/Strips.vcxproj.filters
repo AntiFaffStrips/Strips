@@ -24,6 +24,9 @@
     <ClInclude Include="CEuroScopeUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\include\EuroScopePlugIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -35,5 +38,10 @@
     <ClCompile Include="CEuroScopeUtils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\EuroScopePlugInDll.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
   </ItemGroup>
 </Project>

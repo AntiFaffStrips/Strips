@@ -1,0 +1,9 @@
+﻿  pch.cpp
+  CEuroScopeUtils.cpp
+  dllmain.cpp
+     Creating library D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Release\Strips.lib and object D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Release\Strips.exp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 6 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Strips.vcxproj -> D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Release\Strips.dll
