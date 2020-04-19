@@ -1,0 +1,6 @@
+﻿  pch.cpp
+  CController.cpp
+  CPosition.cpp
+  dllmain.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'D:\Documents\Strips\Strips\PlugInEnvironment\EuroScopePlugInDll.lib'
