@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Strips",
+    "\\Strips\\lib"
   ],
   "SelectedNode": "\\README.md",
   "PreviewInSolutionExplorer": false

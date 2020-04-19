@@ -1,0 +1,5 @@
+﻿  CEuroScopeUtils.cpp
+D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\CEuroScopeUtils.cpp(1,10): fatal error C1853: 'x64\Debug\Strips.pch' precompiled header file is from a different version of the compiler, or the precompiled header is C++ and you are using it from C (or vice versa)
+  dllmain.cpp
+D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\dllmain.cpp(2,10): fatal error C1853: 'x64\Debug\Strips.pch' precompiled header file is from a different version of the compiler, or the precompiled header is C++ and you are using it from C (or vice versa)
+  Generating Code...
