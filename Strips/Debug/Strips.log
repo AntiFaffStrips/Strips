@@ -1,6 +1,3 @@
-﻿  pch.cpp
-  CEuroScopeUtils.cpp
-  dllmain.cpp
-  Generating Code...
+﻿  CEuroScopeUtils.cpp
      Creating library D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.lib and object D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.exp
   Strips.vcxproj -> D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.dll
