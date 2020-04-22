@@ -118,7 +118,7 @@ void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightP
         FPCallsign, FPOrigin, FPDest, FPType, FPEtd, FPAltitude, FPACType, FPAirspeed,
         FPRouteFull, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
     //makes controller message
-    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
+    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan Data Update", buffer, true, true, true, true, true);
 }
 
 void CEuroScopeUtils::OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan,
@@ -154,9 +154,14 @@ void CEuroScopeUtils::OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::
     
     msg = snprintf(buffer, 200, "%s, heading %d, mach %d, rate %d, speed %d, alt %d, voice %c, direct %s, final alt %d, scratcpad %s, sqk %s", 
         FPCallsign, FPHeading, FPMach, FPRate, FPSpeed, FPClearedAlt, FPVoice, FPDirPointName, FPFinalAlt, FPScratchpad, FPSquawk);
-    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
+    DisplayUserMessage("Anti-Faff Strips", "New Controller Assigned Data Update", buffer, true, true, true, true, true);
 }
 
 void CEuroScopeUtils::OnFlightPlanDisconnect(EuroScopePlugIn::CFlightPlan FlightPlan) {
+    //gets callsign for reference
+    const char* FPCallsign = FlightPlan.GetCallsign();
 
+    //nothing to delete yet, since it hasn't been decided where to save the info
+    //sends message to user in meantime
+    DisplayUserMessage("Anti-Faff Strips", "Deleting Flight Plan", FPCallsign, true, true, true, true, true);
 }
