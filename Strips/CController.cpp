@@ -6,7 +6,7 @@
 *
 * Input Callsign of the controllers position
 *
-* Throws string descriptions of errors if the callsign does not contain an underscore, does not have a valid extension and if it is not a uk callsign(starting with "EG")
+* Throws string error messages if the callsign does not contain an underscore, does not have a valid extension and if it is not a uk callsign(starting with "EG")
 */
 CController::CController(string callsign) {
 	//checking inputs
@@ -55,7 +55,9 @@ string CController::getCallsign() {
 }
 
 /**************************************************************************
-* Method to update the position of the contorller object
+* Method to update the position of the controller object
+*
+* Returns a bool which is true if the position entered as the argument was valid and the position was updated correctly and false otherwise
 */
 bool CController::updatePosition(CPosition newPosition) {
 	//check inputs
@@ -67,7 +69,35 @@ bool CController::updatePosition(CPosition newPosition) {
 
 //Static methods
 
+/**************************************************************************
+* Method to return the position being controlled from a callsign
+*
+* CPosition object with the current position 
+*
+* Throws string error messages if the callsign does not contain an underscore, does not have a valid extension and if it is not a uk callsign(starting with "EG").
+*/
 CPosition CController::positionFromCallsign(string callsign) {
+	//checking inputs
+	//checking contains underscore
+	if (callsign.find_first_of("_") == -1) {
+		throw "The callsign entered in the CController constructor was invalid(didn't contain an underscore";
+	}
+	else {
+		int extensionStart = callsign.find_last_of("_") + 1;
+		string positionExtension = callsign.substr(extensionStart, 3);
+		bool invalidPosition = positionExtension != "DEL" || positionExtension != "GND" || positionExtension != "TWR" || positionExtension != "APP" || positionExtension != "CTR";
+		bool unsuportedExtension = positionExtension == "APP" || positionExtension == "CTR";
+		if (invalidPosition) {
+			throw "The position entered in the CController constructor was invalid(The extension was invalid)";
+		}
+	}
+
+	//checking uk
+	string firstTwoChar = callsign.substr(0, 2);
+	if (firstTwoChar != "EG") {
+		throw "The callsign entered was not a uk callsign. Unfortunetly this plugin is only usable for uk positions at the moment";
+	}
+
 	//If unsuported position and with topdown ask if they want to use the tower position, if no topdown then say position not supported and no topdown
 	//find what adjacent controllers are online
 	//work out position based on that
