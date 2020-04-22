@@ -69,3 +69,62 @@ std::string CEuroScopeUtils::UserFacilityConvert(int UserFacility) {
     }
     return UserFacilityStr;
 }
+
+void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan) {
+    // get all relevent flight plan info
+    //gets callsign
+    const char* FPCallsign = FlightPlan.GetCallsign();
+    //origin
+    const char* FPOrigin = FlightPlan.GetFlightPlanData().GetOrigin();
+    //dest
+    const char* FPDest = FlightPlan.GetFlightPlanData().GetDestination();
+    //rules
+    const char* FPType = FlightPlan.GetFlightPlanData().GetAircraftFPType();
+    //actype
+    const char* FPACType = FlightPlan.GetFlightPlanData().GetAircraftInfo();
+    //FL
+    int FPAltitude = FlightPlan.GetFlightPlanData().GetFinalAltitude();
+    //route - this could be looooong
+    const char* FPRouteFull = FlightPlan.GetFlightPlanData().GetRoute();
+    //speed
+    int FPAirspeed = FlightPlan.GetFlightPlanData().GetTrueAirspeed();
+    //sq
+    const char* FPAllocSq = FlightPlan.GetControllerAssignedData().GetSquawk();
+    //voice
+    char FPVoice = FlightPlan.GetFlightPlanData().GetCommunicationType();
+    //edt
+    const char* FPEtd = FlightPlan.GetFlightPlanData().GetEstimatedDepartureTime();
+    //capabilities
+    char FPCapabilities = FlightPlan.GetFlightPlanData().GetCapibilities();
+    //alternate
+    const char* FPAlternate = FlightPlan.GetFlightPlanData().GetAlternate();
+    //arrival runway
+    const char* FPArrRwy = FlightPlan.GetFlightPlanData().GetArrivalRwy();
+    //departure runway
+    const char* FPDepRwy = FlightPlan.GetFlightPlanData().GetDepartureRwy();
+    //remarks
+    const char* FPRmks = FlightPlan.GetFlightPlanData().GetRemarks();
+    //SID
+    const char* FPSid = FlightPlan.GetFlightPlanData().GetSidName();
+    //STAR
+    const char* FPStar = FlightPlan.GetFlightPlanData().GetStarName();
+    
+    // send as message (for the moment)
+    //set up message buffer
+    char buffer[500];
+    int msg;
+    msg = snprintf(buffer, 200, "%s, origin %s, dest %s, rules %s, EDT %s, altitude %d ft, type %s, speed %d kts, route %s, destination %s, squawk %s, voice %c, capabilities %s, alternate %s, arrRwy %s, deprwy %s, rmks %s, SID %s, STAR %s .",
+        FPCallsign, FPOrigin, FPDest, FPType, FPEtd, FPAltitude, FPACType, FPAirspeed,
+        FPRouteFull, FPDest, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
+    //makes controller message
+    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
+}
+
+void CEuroScopeUtils::OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan,
+    int DataType) {
+
+}
+
+void CEuroScopeUtils::OnFlightPlanDisconnect(EuroScopePlugIn::CFlightPlan FlightPlan) {
+
+}
