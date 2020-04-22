@@ -90,7 +90,7 @@ void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightP
     int FPAirspeed = FlightPlan.GetFlightPlanData().GetTrueAirspeed();
     //sq
     const char* FPAllocSq = FlightPlan.GetControllerAssignedData().GetSquawk();
-    //voice
+    //voice (duplicated in OnFlightPlanControllerAssignedDataUpdate)
     char FPVoice = FlightPlan.GetFlightPlanData().GetCommunicationType();
     //edt
     const char* FPEtd = FlightPlan.GetFlightPlanData().GetEstimatedDepartureTime();
@@ -118,13 +118,43 @@ void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightP
         FPCallsign, FPOrigin, FPDest, FPType, FPEtd, FPAltitude, FPACType, FPAirspeed,
         FPRouteFull, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
     //makes controller message
-    
     DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
 }
 
 void CEuroScopeUtils::OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan,
     int DataType) {
-
+    //gets callsign for reference
+    const char* FPCallsign = FlightPlan.GetCallsign();
+    //get all the relevant controller assigned data info
+    //heading
+    int FPHeading = FlightPlan.GetControllerAssignedData().GetAssignedHeading();
+    //mach
+    int FPMach = FlightPlan.GetControllerAssignedData().GetAssignedMach();
+    //heading
+    int FPRate = FlightPlan.GetControllerAssignedData().GetAssignedRate();
+    //speed
+    int FPSpeed = FlightPlan.GetControllerAssignedData().GetAssignedSpeed();
+    //cleared altitude
+    int FPClearedAlt = FlightPlan.GetControllerAssignedData().GetClearedAltitude();
+    //communication type (duplicate of info in OnFlightPlanFlightPlanDataUpdate)
+    char FPVoice = FlightPlan.GetControllerAssignedData().GetCommunicationType();
+    //direct point name
+    const char* FPDirPointName = FlightPlan.GetControllerAssignedData().GetDirectToPointName();
+    //final altitude
+    int FPFinalAlt = FlightPlan.GetControllerAssignedData().GetFinalAltitude();
+    //scratchpad
+    const char* FPScratchpad = FlightPlan.GetControllerAssignedData().GetScratchPadString();
+    //squawk (I think this is squawking, not assigned)
+    const char* FPSquawk = FlightPlan.GetControllerAssignedData().GetSquawk();
+    
+    // send as message (for the moment)
+    //set up message buffer
+    char buffer[1000];
+    int msg;
+    
+    msg = snprintf(buffer, 200, "%s, heading %d, mach %d, rate %d, speed %d, alt %d, voice %c, direct %s, final alt %d, scratcpad %s, sqk %s", 
+        FPCallsign, FPHeading, FPMach, FPRate, FPSpeed, FPClearedAlt, FPVoice, FPDirPointName, FPFinalAlt, FPScratchpad, FPSquawk);
+    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
 }
 
 void CEuroScopeUtils::OnFlightPlanDisconnect(EuroScopePlugIn::CFlightPlan FlightPlan) {
