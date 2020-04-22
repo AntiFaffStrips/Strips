@@ -14,5 +14,9 @@ public:
 	CEuroScopeUtils(void);
 	std::string UserFacilityConvert(int UserFacilityInt);
 	int GetUserFacilityInt();
+	void OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan);
+	void OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan,
+		int DataType);
+	void OnFlightPlanDisconnect(EuroScopePlugIn::CFlightPlan FlightPlan);
 };
 
