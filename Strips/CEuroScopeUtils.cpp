@@ -78,7 +78,7 @@ void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightP
     const char* FPOrigin = FlightPlan.GetFlightPlanData().GetOrigin();
     //dest
     const char* FPDest = FlightPlan.GetFlightPlanData().GetDestination();
-    //rules
+    //type
     const char* FPType = FlightPlan.GetFlightPlanData().GetAircraftFPType();
     //actype
     const char* FPACType = FlightPlan.GetFlightPlanData().GetAircraftInfo();
@@ -111,12 +111,14 @@ void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightP
     
     // send as message (for the moment)
     //set up message buffer
-    char buffer[500];
+    char buffer[1000];
     int msg;
-    msg = snprintf(buffer, 200, "%s, origin %s, dest %s, rules %s, EDT %s, altitude %d ft, type %s, speed %d kts, route %s, destination %s, squawk %s, voice %c, capabilities %s, alternate %s, arrRwy %s, deprwy %s, rmks %s, SID %s, STAR %s .",
+    
+    msg = snprintf(buffer, 1000, "%s, origin %s, dest %s, type %s, EDT %s, altitude %d ft, type %s, speed %d kts, route %s, squawk %s, voice %c, capabilities %c, alternate %s, arrRwy %s, deprwy %s, rmks %s, SID %s, STAR %s .",
         FPCallsign, FPOrigin, FPDest, FPType, FPEtd, FPAltitude, FPACType, FPAirspeed,
-        FPRouteFull, FPDest, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
+        FPRouteFull, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
     //makes controller message
+    
     DisplayUserMessage("Anti-Faff Strips", "New Flight Plan", buffer, true, true, true, true, true);
 }
 
