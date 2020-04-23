@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Strips"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\Strips\\dllmain.cpp",
   "PreviewInSolutionExplorer": false
 }
