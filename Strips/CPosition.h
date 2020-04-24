@@ -4,7 +4,13 @@
 #include <list>
 #include <unordered_map>
 
-//TODO: Add commentary for overall class
+/**
+* Class for a position.
+*
+* This class contains information on the position that someone is controlling. This will change over time and is depending on what other ATC is online
+*
+* As of now it only contains functionality to get the members of the class and to update the member variables, This may change with further devleopment of the project
+*/
 class CPosition
 {
 public:
@@ -30,5 +36,14 @@ public:
 
 	//other instance methods - (non at the moment but leaving space to add if needed)
 
-	//static methods - (non at the moment but leaving space to add if needed)
+	//public static methods - (non at the moment but leaving space to add if needed)
+private:
+	std::string ICAO;
+	std::list<CBox> boxes;
+	std::list<std::string> adjacentControllers;
+	char atis;
+	int runway;
+	std::unordered_map<std::string, bool> sids;
+	int qnh;
+	std::string callsignSelected;
 };
