@@ -69,3 +69,99 @@ std::string CEuroScopeUtils::UserFacilityConvert(int UserFacility) {
     }
     return UserFacilityStr;
 }
+
+void CEuroScopeUtils::OnFlightPlanFlightPlanDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan) {
+    // get all relevent flight plan info
+    //gets callsign
+    const char* FPCallsign = FlightPlan.GetCallsign();
+    //origin
+    const char* FPOrigin = FlightPlan.GetFlightPlanData().GetOrigin();
+    //dest
+    const char* FPDest = FlightPlan.GetFlightPlanData().GetDestination();
+    //type
+    const char* FPType = FlightPlan.GetFlightPlanData().GetAircraftFPType();
+    //actype
+    const char* FPACType = FlightPlan.GetFlightPlanData().GetAircraftInfo();
+    //FL
+    int FPAltitude = FlightPlan.GetFlightPlanData().GetFinalAltitude();
+    //route - this could be looooong
+    const char* FPRouteFull = FlightPlan.GetFlightPlanData().GetRoute();
+    //speed
+    int FPAirspeed = FlightPlan.GetFlightPlanData().GetTrueAirspeed();
+    //sq
+    const char* FPAllocSq = FlightPlan.GetControllerAssignedData().GetSquawk();
+    //voice (duplicated in OnFlightPlanControllerAssignedDataUpdate)
+    char FPVoice = FlightPlan.GetFlightPlanData().GetCommunicationType();
+    //edt
+    const char* FPEtd = FlightPlan.GetFlightPlanData().GetEstimatedDepartureTime();
+    //capabilities
+    char FPCapabilities = FlightPlan.GetFlightPlanData().GetCapibilities();
+    //alternate
+    const char* FPAlternate = FlightPlan.GetFlightPlanData().GetAlternate();
+    //arrival runway
+    const char* FPArrRwy = FlightPlan.GetFlightPlanData().GetArrivalRwy();
+    //departure runway
+    const char* FPDepRwy = FlightPlan.GetFlightPlanData().GetDepartureRwy();
+    //remarks
+    const char* FPRmks = FlightPlan.GetFlightPlanData().GetRemarks();
+    //SID
+    const char* FPSid = FlightPlan.GetFlightPlanData().GetSidName();
+    //STAR
+    const char* FPStar = FlightPlan.GetFlightPlanData().GetStarName();
+    
+    // send as message (for the moment)
+    //set up message buffer
+    char buffer[1000];
+    int msg;
+    
+    msg = snprintf(buffer, 1000, "%s, origin %s, dest %s, type %s, EDT %s, altitude %d ft, type %s, speed %d kts, route %s, squawk %s, voice %c, capabilities %c, alternate %s, arrRwy %s, deprwy %s, rmks %s, SID %s, STAR %s .",
+        FPCallsign, FPOrigin, FPDest, FPType, FPEtd, FPAltitude, FPACType, FPAirspeed,
+        FPRouteFull, FPAllocSq, FPVoice, FPCapabilities, FPAlternate, FPArrRwy, FPDepRwy, FPRmks, FPSid, FPStar);
+    //makes controller message
+    DisplayUserMessage("Anti-Faff Strips", "New Flight Plan Data Update", buffer, true, true, true, true, true);
+}
+
+void CEuroScopeUtils::OnFlightPlanControllerAssignedDataUpdate(EuroScopePlugIn::CFlightPlan FlightPlan,
+    int DataType) {
+    //gets callsign for reference
+    const char* FPCallsign = FlightPlan.GetCallsign();
+    //get all the relevant controller assigned data info
+    //heading
+    int FPHeading = FlightPlan.GetControllerAssignedData().GetAssignedHeading();
+    //mach
+    int FPMach = FlightPlan.GetControllerAssignedData().GetAssignedMach();
+    //heading
+    int FPRate = FlightPlan.GetControllerAssignedData().GetAssignedRate();
+    //speed
+    int FPSpeed = FlightPlan.GetControllerAssignedData().GetAssignedSpeed();
+    //cleared altitude
+    int FPClearedAlt = FlightPlan.GetControllerAssignedData().GetClearedAltitude();
+    //communication type (duplicate of info in OnFlightPlanFlightPlanDataUpdate)
+    char FPVoice = FlightPlan.GetControllerAssignedData().GetCommunicationType();
+    //direct point name
+    const char* FPDirPointName = FlightPlan.GetControllerAssignedData().GetDirectToPointName();
+    //final altitude
+    int FPFinalAlt = FlightPlan.GetControllerAssignedData().GetFinalAltitude();
+    //scratchpad
+    const char* FPScratchpad = FlightPlan.GetControllerAssignedData().GetScratchPadString();
+    //squawk (I think this is squawking, not assigned)
+    const char* FPSquawk = FlightPlan.GetControllerAssignedData().GetSquawk();
+    
+    // send as message (for the moment)
+    //set up message buffer
+    char buffer[1000];
+    int msg;
+    
+    msg = snprintf(buffer, 200, "%s, heading %d, mach %d, rate %d, speed %d, alt %d, voice %c, direct %s, final alt %d, scratcpad %s, sqk %s", 
+        FPCallsign, FPHeading, FPMach, FPRate, FPSpeed, FPClearedAlt, FPVoice, FPDirPointName, FPFinalAlt, FPScratchpad, FPSquawk);
+    DisplayUserMessage("Anti-Faff Strips", "New Controller Assigned Data Update", buffer, true, true, true, true, true);
+}
+
+void CEuroScopeUtils::OnFlightPlanDisconnect(EuroScopePlugIn::CFlightPlan FlightPlan) {
+    //gets callsign for reference
+    const char* FPCallsign = FlightPlan.GetCallsign();
+
+    //nothing to delete yet, since it hasn't been decided where to save the info
+    //sends message to user in meantime
+    DisplayUserMessage("Anti-Faff Strips", "Deleting Flight Plan", FPCallsign, true, true, true, true, true);
+}
