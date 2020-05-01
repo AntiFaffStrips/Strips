@@ -130,12 +130,36 @@ public:
 
 private:
 	//member variables
+	/**
+	* string holding the ICAO of the current position being controlled - Must start with "EG"
+	*/
 	std::string ICAO;
+	/**
+	* List of CBox instances holding the boxes required for this position - The list must not be empty. 
+	*/
 	std::list<CBox> boxes;
+	/**
+	* list of strings each holding the callsign of an adjacent controller - each callsign in the list must be valid  and the list must not be null or emtpy
+	*/
 	std::list<std::string> adjacentControllers;
+	/**
+	* char holding the current atis information - character must be uppercase and be in the range A-Z inclusive
+	*/
 	char atis;
+	/**
+	* int holding the current runway in use - Must be in the range 1-36 inclusive
+	*/
 	int runway;
+	/**
+	* unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception)
+	*/
 	std::unordered_map<std::string, bool> sids;
+	/**
+	* int holding the current QNH - Must be in the range 931-1067
+	*/
 	int qnh;
+	/**
+	* with the callsign selected - Must have an associated CStrip object
+	*/
 	std::string callsignSelected;
 };
