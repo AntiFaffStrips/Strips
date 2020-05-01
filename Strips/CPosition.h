@@ -28,7 +28,7 @@ public:
 	* 
 	* @throws exception if any of the inputs are invalid. Details on what is valid above
 	*/
-	CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char atis, int runway, std::unordered_map<std::string, bool> sids, int qnh, std::string callsignSelected); //needs issue update
+	CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char atis, int runway, std::unordered_map<std::string, bool> sids, int qnh, std::string callsignSelected);
 
 	//get methods
 	/**
@@ -82,7 +82,7 @@ public:
 	* 
 	* @throws exception with error message if the input is invalid. Details on what is valid is found above
 	*/
-	void updateAdjacentControllers(std::list<std::string> newAdjacentControllers); //needs issue update
+	void updateAdjacentControllers(std::list<std::string> fullAdjacentControllers);
 	/**
 	* Method to update the current ATIS information in the current position instance with a character to change to(from euroscope)
 	*
@@ -114,7 +114,7 @@ public:
 	*
 	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
 	*/
-	void updateQNH(int newQNH);//needs issue update
+	void updateQNH(int newQNH);
 	/**
 	* Method to update the current selected callsign in the current position instance
 	*
