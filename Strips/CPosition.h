@@ -19,7 +19,7 @@ public:
 	*
 	* @param string with the ICAO of the airport the being controlled - Must start with "EG" (be in the uk)
 	* @param list of CBox objects with the boxes that are required for this position - The list must not be null and must not be empty.
-	* @param list of adjacent controllers that are currently online - each callsign in the list must be valid (callsign must contain at least 1 underscore, start with "EG" and have an extension after the last underscore of any of the following: "DEL", "GND", "TWR", "APP", "CTR") and the list must not be null or emtpy.
+	* @param list of adjacent controllers that are currently online - each callsign in the list must be valid (callsign must contain at least 1 underscore and have an extension after the last underscore of any of the following: "DEL", "GND", "TWR", "APP", "CTR") and the list must not be null or emtpy.
 	* @param character with the current atis information - character must be uppercase and be in the range A-Z inclusive. and cannot be null
 	* @param integer with the current runway in use - integer must not be null and must be in the range 1-36 inclusive
 	* @param unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception), map cannot be null nor can any sid in the map or the mapped booolean value.
@@ -28,7 +28,7 @@ public:
 	* 
 	* @throws exception if any of the inputs are invalid. Details on what is valid above
 	*/
-	CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char atis, int runway, std::unordered_map<std::string, bool> sids, int qnh, std::string callsignSelected);
+	CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char atis, int runway, std::unordered_map<std::string, bool> SIDs, int qnh, std::string callsignSelected);
 
 	//get methods
 	/**
@@ -133,33 +133,33 @@ private:
 	/**
 	* string holding the ICAO of the current position being controlled - Must start with "EG"
 	*/
-	std::string ICAO;
+	std::string m_ICAO;
 	/**
 	* List of CBox instances holding the boxes required for this position - The list must not be empty. 
 	*/
-	std::list<CBox> boxes;
+	std::list<CBox> m_boxes;
 	/**
 	* list of strings each holding the callsign of an adjacent controller - each callsign in the list must be valid  and the list must not be null or emtpy
 	*/
-	std::list<std::string> adjacentControllers;
+	std::list<std::string> m_adjacentControllers;
 	/**
 	* char holding the current atis information - character must be uppercase and be in the range A-Z inclusive
 	*/
-	char atis;
+	char m_ATIS;
 	/**
 	* int holding the current runway in use - Must be in the range 1-36 inclusive
 	*/
-	int runway;
+	int m_runway;
 	/**
 	* unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception)
 	*/
-	std::unordered_map<std::string, bool> sids;
+	std::unordered_map<std::string, bool> m_SIDs; //needs issue update
 	/**
 	* int holding the current QNH - Must be in the range 931-1067
 	*/
-	int qnh;
+	int m_QNH;
 	/**
 	* with the callsign selected - Must have an associated CStrip object
 	*/
-	std::string callsignSelected;
+	std::string m_callsignSelected;
 };
