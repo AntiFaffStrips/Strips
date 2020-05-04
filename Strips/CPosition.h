@@ -69,6 +69,12 @@ public:
 	*/
 	std::string getArrRunway();
 	/**
+	* Method to get the sids which are freeflow on the current position instance
+	*
+	* @return unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise
+	*/
+	std::string getSIDs();
+	/**
 	* Method to get the sids for the airfield and whether they are currently free flow or not from the current position instance
 	*
 	* @return unordered map which maps a string to a boolean where the string is the SID and the bool is whether the sid is freeflow or not where true = freeflow
@@ -107,13 +113,27 @@ public:
 	*/
 	void updateAtis(int change);
 	/**
-	* Method to update the current runway in use for the current position instance.
+	* Method to update the current departure runway for the current position instance.
 	*
-	* @param int with the runway to be updated to - Must not be null and must= be in the range 1-36
+	* @param string with the runway to update to - Must not be null and must be in the range 1-36 with an optional "R" or "L" appended
 	*
 	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
 	*/
-	void updateRunway(int newRunway);
+	void updateDepRunway(int newRunway);
+	/**
+	* Method to update the current arrival runway for the current position instance.
+	*
+	* @param string with the runway to update to - Must not be null and must be in the range 1-36 with an optional "R" or "L" appended
+	*
+	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
+	*/
+	void updateArrRunway(int newRunway);
+	/**
+	* Method to update which sids are freeflow in the current position index
+	*
+	* @param string with the sid to toggle - should be a valid sid and exception will not be thrown as the SID is passed from the front end and will be assumed to be valid as the data is given to front end from this class.
+	*/
+	void updateSIDs(string SID);
 	/**
 	* Method to update the current QNH in the current position instance
 	*
@@ -160,7 +180,7 @@ private:
 	/**
 	* string holding the current arrival runway - Must be in the range 1-36 inclusive with an optional "L" or "R" or appended to the end of the number
 	*/
-	std::string arrRunway;
+	std::string m_arrRunway;
 	/**
 	* unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception)
 	*/

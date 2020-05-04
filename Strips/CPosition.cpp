@@ -27,6 +27,90 @@ CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::str
 	m_callsignSelected = callsignSelected;
 }
 
+//Get methods
+/**
+* Method to get the ICAO of the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getICAO() {
+	return m_ICAO;
+}
+
+/**
+* Method to get the bxoes required for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getBoxes() {
+	return m_boxes;
+}
+
+/**
+* Method to get the adjacent controllers for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getAdjacentControllers() {
+	return m_boxes;
+}
+
+/**
+* Method to get the ATIS info for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getAtis() {
+	return m_ATIS;
+}
+
+/**
+* Method to get the Departure runway for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getDepRunway() {
+	return m_depRunway;
+}
+
+/**
+* Method to get the arrival runway of the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getArrRunway() {
+	return m_arrRunway;
+}
+
+/**
+* Method to get the SIDs the are freeflow for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getSIDs() {
+	return m_SIDs;
+}
+
+/**
+* Method to get the QNH for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getQNH() {
+	return m_QNH;
+}
+
+/**
+* Method to get the CallsignSelected for the current position index
+*
+* More details can be found in .h file
+*/
+CPosition::getCallsignSelected() {
+	return m_callsignSelected;
+}
+
+//Update Methods
+
 
 //Helper functions
 /**
