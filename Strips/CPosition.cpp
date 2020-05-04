@@ -1,17 +1,16 @@
 #include "pch.h"
 #include "CPosition.h"
 
-//TODO: Fix runway in use to include depRunway and ARR runway and to held in a string
-//		- Check if the callsign in callsign selected exists to a strip instance
+//TODO: - Check if the callsign in callsign selected exists to a strip instance
 
 /**
 * Class Constructor
 *
-* More details in CPosition.h
+* More details in CPosition.hs
 */
-CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char ATIS, int runway, std::unordered_map<std::string, bool> SIDs, int QNH, std::string callsignSelected) {
+CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::string> adjacentControllers, char ATIS, std::string depRunway, std::string arrRunway, std::unordered_map<std::string, bool> SIDs, int QNH, std::string callsignSelected) {
 	//Checking inputs
-	bool areInputsValid = isICAOValid(ICAO) && isBoxesValid(boxes) && isAdjacentControllersValid(adjacentControllers) && isAtisValid(ATIS) && isSIDsValid(SIDs) && isQNHValid(QNH) && isCallsignSelectedValid(callsignSelected);
+	bool areInputsValid = isICAOValid(ICAO) && isBoxesValid(boxes) && isAdjacentControllersValid(adjacentControllers) && isAtisValid(ATIS) && isRunwayValid(depRunway) && isRunwayValid(arrRunway) && isSIDsValid(SIDs) && isQNHValid(QNH) && isCallsignSelectedValid(callsignSelected);
 	if (!areInputsValid) {
 		throw "ERROR: One or more of your inputs passed to class constructor in CPosiiton were invalid";
 	}
@@ -21,6 +20,8 @@ CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::str
 	m_boxes = boxes;
 	m_adjacentControllers = adjacentControllers;
 	m_ATIS = ATIS;
+	m_depRunway = depRunway;
+	m_arrRunway = arrRunway;
 	m_SIDs = SIDs;
 	m_QNH = QNH;
 	m_callsignSelected = callsignSelected;
@@ -83,7 +84,7 @@ CPosition::isAdjacentControllersValid(std::list<std::string> adjacentControllers
 		}
 
 		std::string extension = controller.substr(indexOfUnderscore, 3);
-		if (extension != "DEL" || extension != "GND" || extension != "TWR" || extension != "APP" || extension != "CTR") {
+		if (extension != "DEL" && extension != "GND" && extension != "TWR" && extension != "APP" && extension != "CTR") {
 			return false;
 		}
 	}
@@ -108,15 +109,23 @@ CPosition::isAtisValid(char ATIS) {
 }
 
 /**
-* Method to check if the runway parameter is valid as per constrictions in CPosition.h constructor commentary
+* Method to check if a runway parameter is valid as per constrictions in CPosition.h constructor commentary
 *
-* @param int with the current runway in use
+* @param string with a runway
 *
-* @return true if ATIS is valid and false otherwise
+* @return boolean which is true if the runway is valid and false otherwise
 */
-CPosition::isRunwayValid(int runway) {
-	if (runway < 1 || runway > 36) {
+CPosition::isRunwayValid(std::string runway) {
+	int runwayNums = std::stoi(runway.substr(0.2))
+	if (runwayNums < 1 || runwayNums > 36) {
 		return false;
+	}
+
+	if (runway.substr(2, 1) != -1) {
+		std::string suffix = runway.substr(2, 1);
+		if (suffix != "L" && suffix != "R") {
+			return false;
+		}
 	}
 	
 	return true;
