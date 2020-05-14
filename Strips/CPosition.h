@@ -71,15 +71,15 @@ public:
 	/**
 	* Method to get the sids which are freeflow on the current position instance
 	*
-	* @return unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise
+	* @return unordered map which maps a string to a boolean where the string is the SID and the bool is whether the sid is freeflow or not where true = freeflow
 	*/
-	std::string getSIDs();
+	std::unordered_map<std::string, bool> getSIDs();
 	/**
 	* Method to get the sids for the airfield and whether they are currently free flow or not from the current position instance
 	*
-	* @return unordered map which maps a string to a boolean where the string is the SID and the bool is whether the sid is freeflow or not where true = freeflow
+	* @return int holding the current QNH
 	*/
-	std::unordered_map<std::string, bool> getQNH();
+	 int getQNH();
 	/**
 	* Method to get the current selected callsign for the current position instance
 	*
@@ -133,7 +133,7 @@ public:
 	*
 	* @param string with the sid to toggle - should be a valid sid and exception will not be thrown as the SID is passed from the front end and will be assumed to be valid as the data is given to front end from this class.
 	*/
-	void updateSIDs(string SID);
+	void updateSIDs(std::string SID);
 	/**
 	* Method to update the current QNH in the current position instance
 	*

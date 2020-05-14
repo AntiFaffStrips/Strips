@@ -33,7 +33,7 @@ CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::str
 *
 * More details can be found in .h file
 */
-CPosition::getICAO() {
+std::string CPosition::getICAO() {
 	return m_ICAO;
 }
 
@@ -42,7 +42,7 @@ CPosition::getICAO() {
 *
 * More details can be found in .h file
 */
-CPosition::getBoxes() {
+std::list<CBox> CPosition::getBoxes() {
 	return m_boxes;
 }
 
@@ -51,8 +51,8 @@ CPosition::getBoxes() {
 *
 * More details can be found in .h file
 */
-CPosition::getAdjacentControllers() {
-	return m_boxes;
+std::list<std::string> CPosition::getAdjacentControllers() {
+	return m_adjacentControllers;
 }
 
 /**
@@ -60,7 +60,7 @@ CPosition::getAdjacentControllers() {
 *
 * More details can be found in .h file
 */
-CPosition::getAtis() {
+char CPosition::getAtis() {
 	return m_ATIS;
 }
 
@@ -69,7 +69,7 @@ CPosition::getAtis() {
 *
 * More details can be found in .h file
 */
-CPosition::getDepRunway() {
+std::string CPosition::getDepRunway() {
 	return m_depRunway;
 }
 
@@ -78,7 +78,7 @@ CPosition::getDepRunway() {
 *
 * More details can be found in .h file
 */
-CPosition::getArrRunway() {
+std::string CPosition::getArrRunway() {
 	return m_arrRunway;
 }
 
@@ -87,7 +87,7 @@ CPosition::getArrRunway() {
 *
 * More details can be found in .h file
 */
-CPosition::getSIDs() {
+std::unordered_map<std::string, bool> CPosition::getSIDs() {
 	return m_SIDs;
 }
 
@@ -96,7 +96,7 @@ CPosition::getSIDs() {
 *
 * More details can be found in .h file
 */
-CPosition::getQNH() {
+int CPosition::getQNH() {
 	return m_QNH;
 }
 
@@ -105,14 +105,55 @@ CPosition::getQNH() {
 *
 * More details can be found in .h file
 */
-CPosition::getCallsignSelected() {
+std::string CPosition::getCallsignSelected() {
 	return m_callsignSelected;
 }
 
 //Update Methods
+/**
+* Method to update the adjacent controllers for the current position instance
+*
+* More details can be found in CPosition.h
+*/
+void CPosition::updateAdjacentControllers(std::list<std::string> AdjacentControllers) {
+	if (!isAdjacentControllersValid(AdjacentControllers)) {
+		throw "ERROR: There was an issue with one of the contorllers passed to updateAdjacentControllers in CPosition Class";
+	}
 
+	getRelevantAdjacentControllers(AdjacentControllers, m_ICAO);
+	m_adjacentControllers = AdjacentControllers;
+}
 
 //Helper functions
+/**
+* Method to check if the extension of a callsign is valid
+*
+* Used throughout the class
+*
+* @param string holding the extension to be tested if valid
+*
+* @returns boolean which is true if the extension is valid and false otherwise
+*/
+bool isExtensionValid(std::string extension) {
+	bool invalidExtension = extension != "DEL" && extension != "GND" && extension != "TWR" && extension != "APP" && extension != "CTR";
+	if (invalidExtension) {
+		return false;
+	}
+
+	return true;
+}
+
+std::string getExtensionFromCallsign(std::string callsign) {
+	int indexOfUnderscore = callsign.find_last_of("_");
+	if (indexOfUnderscore == -1) {
+		throw "ERROR: There was an issue finding an underscore in your callsign in getExtensionFromCallsign in CPosition class";
+	}
+
+	std::string extension = callsign.substr(indexOfUnderscore, 3);
+	return extension;
+}
+
+//For Constructor
 /**
 * Method to check if the ICAO perameter is valid as per constrictions in CPosition.h constructor commentary
 *
@@ -137,7 +178,7 @@ bool isICAOValid(std::string ICAO) {
 * @return true if boxes is valid and false otherwise
 */
 bool isBoxesValid(std::list<CBox> boxes) {
-	if (boxes == NULL || boxes.size == 0) {
+	if (boxes.size == 0) {
 		return false;
 	}
 
@@ -151,29 +192,23 @@ bool isBoxesValid(std::list<CBox> boxes) {
 *
 * @return true if adjacentControllers is valid and false otherwise
 */
-CPosition::isAdjacentControllersValid(std::list<std::string> adjacentControllers) {
-	if (adjacentControllers == NULL || adjacentControllers.size == 0) {
+bool isAdjacentControllersValid(std::list<std::string> adjacentControllers) {
+	bool valid = true;
+	if (adjacentControllers.size == 0) {
 		return false;
 	}
 
 	for (std::string controller : adjacentControllers) {
-		std::string countryPrefix = ICAO.substr(0, 2);
+		std::string countryPrefix = controller.substr(0, 2);
 		if (countryPrefix != "EG") {
-			return false;
+			valid = false;
 		}
 
-		int indexOfUnderscore = controller.find_last_of("_");
-		if (indexOfUnderscore == -1) {
-			return false;
-		}
-
-		std::string extension = controller.substr(indexOfUnderscore, 3);
-		if (extension != "DEL" && extension != "GND" && extension != "TWR" && extension != "APP" && extension != "CTR") {
-			return false;
-		}
+		std::string extension = getExtensionFromCallsign(controller);
+		valid = isExtensionValid(extension);
 	}
 
-	return true;
+	return valid;
 }
 
 /**
@@ -183,7 +218,7 @@ CPosition::isAdjacentControllersValid(std::list<std::string> adjacentControllers
 *
 * @return true if ATIS is valid and false otherwise
 */
-CPosition::isAtisValid(char ATIS) {
+bool isAtisValid(char ATIS) {
 	int atisAscii = (int)ATIS;
 	if (atisAscii < 65 || atisAscii > 91) {
 		return false;
@@ -199,13 +234,13 @@ CPosition::isAtisValid(char ATIS) {
 *
 * @return boolean which is true if the runway is valid and false otherwise
 */
-CPosition::isRunwayValid(std::string runway) {
-	int runwayNums = std::stoi(runway.substr(0.2))
+bool isRunwayValid(std::string runway) {
+	int runwayNums = std::stoi(runway.substr(0.2));
 	if (runwayNums < 1 || runwayNums > 36) {
 		return false;
 	}
 
-	if (runway.substr(2, 1) != -1) {
+	if (runway.length >= 4) {
 		std::string suffix = runway.substr(2, 1);
 		if (suffix != "L" && suffix != "R") {
 			return false;
@@ -222,11 +257,7 @@ CPosition::isRunwayValid(std::string runway) {
 *
 * @return true if SIDs is valid and false otherwise
 */
-CPosition::isSIDsValid(std::unordered_map<std::string, bool> SIDs) {
-	if (SIDs == NULL) {
-		return false;
-	}
-
+bool isSIDsValid(std::unordered_map<std::string, bool> SIDs) {
 	return true;
 }
 
@@ -237,8 +268,8 @@ CPosition::isSIDsValid(std::unordered_map<std::string, bool> SIDs) {
 *
 * @return true if ATIS is valid and false otherwise
 */
-CPosition::isQNHValid(int qnh) {
-	if (qnh == null || qnh < 931 || qnh > 1067) {
+bool isQNHValid(int qnh) {
+	if (qnh == NULL || qnh < 931 || qnh > 1067) {
 		return false;
 	}
 
@@ -252,10 +283,46 @@ CPosition::isQNHValid(int qnh) {
 *
 * @return true if callsignSelected is valid and false otherwise
 */
-CPosition::isCallsignSelectedValid(std::string callsignSelected) {
-	if (callsignSelected == NULL) {
-		return false;
-	}
-
+bool isCallsignSelectedValid(std::string callsignSelected) {
 	return true;
+}
+
+//Update Methods
+/**
+* Method to get the relevant adjacent controllers from the current position
+*
+* Returns void because it updates the fullAdjacentControllers object in RAM therefore the pointer remains the same
+*/
+void getRelevantAdjacentControllers(std::list<std::string> fullAdjacentControllers, std::string positionICAO) {
+	for (std::string controller : fullAdjacentControllers) {
+		std::string ICAO = getICAOFromCallsign(controller);
+		bool positionNotValid = ICAO != positionICAO && ICAO != "LON" && ICAO != "SCO" && ICAO != "LTC" && ICAO != "MAN" && ICAO != "STC";
+
+		if (positionNotValid) {
+			fullAdjacentControllers.remove(controller);
+		}
+		else {
+			std::string extension = getExtensionFromCallsign(controller);
+			if (!isExtensionValid(extension)) {
+				fullAdjacentControllers.remove(controller);
+			}
+		}
+	}
+}
+
+/**
+* Method to get the ICAO of a position from the callsign
+*
+* @param string with a controller callsign
+*
+* @return string with the ICAO
+*/
+std::string getICAOFromCallsign(std::string controller) {
+	int indexOfUnderscore = controller.find_first_of("_");
+	if (indexOfUnderscore == -1) {
+		throw "ERROR: couldn't find an underscore in getICAOFromCallsign in CPosition class";
+	}
+	int lengthOfICAO = indexOfUnderscore - 1;
+	std::string ICAO = controller.substr(0, lengthOfICAO);
+	return ICAO;
 }
