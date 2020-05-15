@@ -1,9 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Strips",
-    "\\Strips\\lib"
+    "\\Strips"
   ],
-  "SelectedNode": "\\Strips\\CEuroScopeUtils.cpp",
   "PreviewInSolutionExplorer": false
 }
