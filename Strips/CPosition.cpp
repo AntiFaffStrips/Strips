@@ -3,6 +3,9 @@
 #include "pch.h"
 #include "CPosition.h"
 
+const int C_ASCII_A = 65;
+const int C_ASCII_Z = 91;
+
 //TODO: - Check if the callsign in callsign selected exists to a strip instance
 
 /**
@@ -126,6 +129,35 @@ void CPosition::updateAdjacentControllers(std::list<std::string> AdjacentControl
 	m_adjacentControllers = AdjacentControllers;
 }
 
+/**
+* Method to update the ATIS information for the current position instance
+*
+* More details can be found in CPosition.h
+*/
+void CPosition::updateAtis(char newAtis) {
+	if (!isAtisValid(newAtis)) {
+		throw "ERROR: There was an issue with the newAtis passed to updateAtis(newAtis) in CPosiiton Class";
+	}
+
+	m_ATIS = newAtis;
+}
+
+void CPosition::updateAtis(int change) {
+	if (change != 1 && change != -1) {
+		throw "ERROR: There was an issue with the change passed to updateAtis(change) in CPosition Class";
+	}
+
+	if (m_ATIS == C_ASCII_Z && change == 1) {
+		m_ATIS = C_ASCII_A;
+	}
+	else if (m_ATIS == C_ASCII_A && change == -1) {
+		m_ATIS = C_ASCII_Z;
+	}
+	else {
+		m_ATIS += change;
+	}
+}
+
 //Helper functions----------------------------------------------------------------------------------------------
 /**
 * Method to check if the extension of a callsign is valid
@@ -170,7 +202,7 @@ std::string getExtensionFromCallsign(std::string callsign) {
 	return extension;
 }
 
-//For Constructor
+//For Constructor--------------------------------------------------------------------------------------------------------
 /**
 * Method to check if the ICAO perameter is valid as per constrictions in CPosition.h constructor commentary
 *
@@ -304,7 +336,7 @@ bool isCallsignSelectedValid(std::string callsignSelected) {
 	return true;
 }
 
-//Update Methods
+//Update Methods-------------------------------------------------------------------------------------------------------------------------------------
 /**
 * Method to get the relevant adjacent controllers from the current position
 *
