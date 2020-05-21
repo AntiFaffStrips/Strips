@@ -29,7 +29,7 @@ CPosition::CPosition(std::string ICAO, std::list<CBox> boxes, std::list<std::str
 	m_callsignSelected = callsignSelected;
 }
 
-//Get methods
+//Get methods------------------------------------------------------------------------------------------------
 /**
 * Method to get the ICAO of the current position index
 *
@@ -111,7 +111,7 @@ std::string CPosition::getCallsignSelected() {
 	return m_callsignSelected;
 }
 
-//Update Methods
+//Update Methods-------------------------------------------------------------------------------------------------
 /**
 * Method to update the adjacent controllers for the current position instance
 *
@@ -126,7 +126,7 @@ void CPosition::updateAdjacentControllers(std::list<std::string> AdjacentControl
 	m_adjacentControllers = AdjacentControllers;
 }
 
-//Helper functions
+//Helper functions----------------------------------------------------------------------------------------------
 /**
 * Method to check if the extension of a callsign is valid
 *
@@ -146,16 +146,24 @@ bool isExtensionValid(std::string extension) {
 }
 
 /**
-* Add commentary
+* Method to get the extension(TWR/APP) from a callsign
 *
+* @param string with the callsign to extract the extension from
 *
+* @throws error if there is no underscore in the callsign or if the extension is not 3 characters long
 *
-*
+* @return string with the extension of the callsign
 */
 std::string getExtensionFromCallsign(std::string callsign) {
 	int indexOfUnderscore = callsign.find_last_of("_");
+	int callsignLength = callsign.length();
+	int expectedLength = indexOfUnderscore + 4;
 	if (indexOfUnderscore == -1) {
 		throw "ERROR: There was an issue finding an underscore in your callsign in getExtensionFromCallsign in CPosition class";
+	}
+
+	if (callsign.length != expectedLength) {
+		throw "ERROR: There was an issue with the length of the extension in getExtensionFromCallsign in CPosition class";
 	}
 
 	std::string extension = callsign.substr(indexOfUnderscore, 3);
