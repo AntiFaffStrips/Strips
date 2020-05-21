@@ -119,7 +119,7 @@ public:
 	*
 	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
 	*/
-	void updateDepRunway(int newRunway);
+	void updateDepRunway(std::string newRunway);
 	/**
 	* Method to update the current arrival runway for the current position instance.
 	*
@@ -127,7 +127,7 @@ public:
 	*
 	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
 	*/
-	void updateArrRunway(int newRunway);
+	void updateArrRunway(std::string newRunway);
 	/**
 	* Method to update which sids are freeflow in the current position index
 	*

@@ -168,12 +168,25 @@ void CPosition::updateAtis(int change) {
 *
 * More details in CPosition.h
 */
-void CPosition::updateDepRunway(int newRunway) {
+void CPosition::updateDepRunway(std::string newRunway) {
 	if (!isRunwayValid(newRunway)) {
 		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPositionClass";
 	}
 
 	m_depRunway = newRunway;
+}
+
+/**
+* Method to update the arrival runway for the current position instance
+*
+* More details can be found in CPosition.h
+*/
+void CPosition::updateArrRunway(std::string newRunway) {
+	if (!isRunwayValid(newRunway)) {
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPositionClass";
+	}
+
+	m_arrRunway = newRunway;
 }
 
 //Helper functions----------------------------------------------------------------------------------------------
