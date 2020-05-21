@@ -269,7 +269,7 @@ bool isAdjacentControllersValid(std::list<std::string> adjacentControllers) {
 */
 bool isAtisValid(char ATIS) {
 	int atisAscii = (int)ATIS;
-	if (atisAscii < 65 || atisAscii > 91) {
+	if (atisAscii < C_ASCII_A || atisAscii > C_ASCII_Z) {
 		return false;
 	}
 
