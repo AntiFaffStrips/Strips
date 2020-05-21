@@ -189,6 +189,21 @@ void CPosition::updateArrRunway(std::string newRunway) {
 	m_arrRunway = newRunway;
 }
 
+//Add updateSIDs here
+
+/**
+* Method to update the QNH in the current position instance
+*
+* More details can be found in CPosition.h
+*/
+void CPosition::updateQNH(int newQNH) {
+	if (!isQNHValid(newQNH)) {
+		throw "ERROR: There was an issue with the new QNH passed to updateQNH in CPOsitionClass";
+	}
+
+	m_QNH = newQNH;
+}
+
 //Helper functions----------------------------------------------------------------------------------------------
 /**
 * Method to check if the extension of a callsign is valid
