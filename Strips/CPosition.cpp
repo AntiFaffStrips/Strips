@@ -142,6 +142,11 @@ void CPosition::updateAtis(char newAtis) {
 	m_ATIS = newAtis;
 }
 
+/*
+* Method to update the atis information in the current position instance by an increment of 1
+*
+* More details can be found in CPosition.h
+*/
 void CPosition::updateAtis(int change) {
 	if (change != 1 && change != -1) {
 		throw "ERROR: There was an issue with the change passed to updateAtis(change) in CPosition Class";
@@ -156,6 +161,19 @@ void CPosition::updateAtis(int change) {
 	else {
 		m_ATIS += change;
 	}
+}
+
+/**
+* Method to update the departure runway for the current position instance
+*
+* More details in CPosition.h
+*/
+void CPosition::updateDepRunway(int newRunway) {
+	if (!isRunwayValid(newRunway)) {
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPositionClass";
+	}
+
+	m_depRunway = newRunway;
 }
 
 //Helper functions----------------------------------------------------------------------------------------------
