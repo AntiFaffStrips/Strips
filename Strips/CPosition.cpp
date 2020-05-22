@@ -189,7 +189,20 @@ void CPosition::updateArrRunway(std::string newRunway) {
 	m_arrRunway = newRunway;
 }
 
-//Add updateSIDs here
+/**
+* Method to update the SIDs which are freeflow in the current position instance
+*
+* More details in CPosition.h
+*/
+void CPosition::updateSIDs(std::string SIDKey) {
+	bool isSIDInvalid = m_SIDs.find == m_SIDs.end();
+	if (isSIDInvalid) {
+		throw "ERROR: There was an issue with the SID passed to updateSIDs in CPosition.cpp (the SID was not found in the map)";
+	}
+
+	bool currentValue = m_SIDs[SIDKey];
+	m_SIDs.insert_or_assign(SIDKey, !currentValue);
+}
 
 /**
 * Method to update the QNH in the current position instance

@@ -139,7 +139,7 @@ public:
 	*
 	* @param int with the new QNH to change to - Must not be null and value must be in the range 931-1067
 	*
-	* @throws exception with error message if the perameter is invalid. Details on what is valid can be found above
+	* @throws exception with error message if the perameter is invalid. Invalid if the SID passed is not in the unordered_map
 	*/
 	void updateQNH(int newQNH);
 	/**
@@ -182,7 +182,7 @@ private:
 	*/
 	std::string m_arrRunway;
 	/**
-	* unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception)
+	* unordered map which maps a string with the sid to a boolean which is true if freeflow and false otherwise - each sid must be a valid sid for that aiport(should be achieved by only loading sids from the approved .xml files and an incorrect sid will not throw and exception).
 	*/
 	std::unordered_map<std::string, bool> m_SIDs; //needs issue update
 	/**
