@@ -170,7 +170,7 @@ void CPosition::updateAtis(int change) {
 */
 void CPosition::updateDepRunway(std::string newRunway) {
 	if (!isRunwayValid(newRunway)) {
-		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPositionClass";
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class";
 	}
 
 	m_depRunway = newRunway;
@@ -183,7 +183,7 @@ void CPosition::updateDepRunway(std::string newRunway) {
 */
 void CPosition::updateArrRunway(std::string newRunway) {
 	if (!isRunwayValid(newRunway)) {
-		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPositionClass";
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class";
 	}
 
 	m_arrRunway = newRunway;
@@ -197,7 +197,7 @@ void CPosition::updateArrRunway(std::string newRunway) {
 void CPosition::updateSIDs(std::string SIDKey) {
 	bool isSIDInvalid = m_SIDs.find == m_SIDs.end();
 	if (isSIDInvalid) {
-		throw "ERROR: There was an issue with the SID passed to updateSIDs in CPosition.cpp (the SID was not found in the map)";
+		throw "ERROR: There was an issue with the SID passed to updateSIDs in CPosition Class (the SID was not found in the map)";
 	}
 
 	bool currentValue = m_SIDs[SIDKey];
@@ -211,10 +211,23 @@ void CPosition::updateSIDs(std::string SIDKey) {
 */
 void CPosition::updateQNH(int newQNH) {
 	if (!isQNHValid(newQNH)) {
-		throw "ERROR: There was an issue with the new QNH passed to updateQNH in CPOsitionClass";
+		throw "ERROR: There was an issue with the new QNH passed to updateQNH in CPOsition Class";
 	}
 
 	m_QNH = newQNH;
+}
+
+/**
+* Method to update the callsign selected in the current position instace
+*
+* More details can be found in CPosition.h
+*/
+void CPosition::updateCallsignSelected(std::string newCallsign) {
+	if (!isCallsignSelectedValid(newCallsign)) {
+		throw "ERROR: There was an issue with the newCallsign passed to updateCallsignSelected in CPosition Class";
+	}
+
+	m_callsignSelected = newCallsign;
 }
 
 //Helper functions----------------------------------------------------------------------------------------------
@@ -392,7 +405,13 @@ bool isQNHValid(int qnh) {
 * @return true if callsignSelected is valid and false otherwise
 */
 bool isCallsignSelectedValid(std::string callsignSelected) {
-	return true;
+	if (callsignSelected == "") {
+		return true;
+	}
+
+	//Go through each strip and check if the callsignSelected string matches a callsign String in the strip instance
+
+	return false;
 }
 
 //Update Methods-------------------------------------------------------------------------------------------------------------------------------------
