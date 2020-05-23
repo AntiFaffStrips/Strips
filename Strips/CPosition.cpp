@@ -122,7 +122,7 @@ std::string CPosition::getCallsignSelected() {
 */
 void CPosition::updateAdjacentControllers(std::list<std::string> AdjacentControllers) {
 	if (!isAdjacentControllersValid(AdjacentControllers)) {
-		throw "ERROR: There was an issue with one of the contorllers passed to updateAdjacentControllers in CPosition Class";
+		throw "ERROR: There was an issue with one of the contorllers passed to updateAdjacentControllers in CPosition Class.";
 	}
 
 	getRelevantAdjacentControllers(AdjacentControllers, m_ICAO);
@@ -136,7 +136,7 @@ void CPosition::updateAdjacentControllers(std::list<std::string> AdjacentControl
 */
 void CPosition::updateAtis(char newAtis) {
 	if (!isAtisValid(newAtis)) {
-		throw "ERROR: There was an issue with the newAtis passed to updateAtis(newAtis) in CPosiiton Class";
+		throw "ERROR: There was an issue with the newAtis passed to updateAtis(newAtis) in CPosiiton Class. The value passed to the method was " + newAtis;
 	}
 
 	m_ATIS = newAtis;
@@ -149,7 +149,7 @@ void CPosition::updateAtis(char newAtis) {
 */
 void CPosition::updateAtis(int change) {
 	if (change != 1 && change != -1) {
-		throw "ERROR: There was an issue with the change passed to updateAtis(change) in CPosition Class";
+		throw "ERROR: There was an issue with the change passed to updateAtis(change) in CPosition Class. The value passed to the method was " + change;
 	}
 
 	if (m_ATIS == C_ASCII_Z && change == 1) {
@@ -170,7 +170,7 @@ void CPosition::updateAtis(int change) {
 */
 void CPosition::updateDepRunway(std::string newRunway) {
 	if (!isRunwayValid(newRunway)) {
-		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class";
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class. The value passed to the method was " + newRunway;
 	}
 
 	m_depRunway = newRunway;
@@ -183,7 +183,7 @@ void CPosition::updateDepRunway(std::string newRunway) {
 */
 void CPosition::updateArrRunway(std::string newRunway) {
 	if (!isRunwayValid(newRunway)) {
-		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class";
+		throw "ERROR: There was an issue with the new runway passed to updateDepRunway in CPosition Class. The value passed to the method was " + newRunway;
 	}
 
 	m_arrRunway = newRunway;
@@ -195,7 +195,7 @@ void CPosition::updateArrRunway(std::string newRunway) {
 * More details in CPosition.h
 */
 void CPosition::updateSIDs(std::string SIDKey) {
-	bool isSIDInvalid = m_SIDs.find == m_SIDs.end();
+	bool isSIDInvalid = m_SIDs.find(SIDKey) == m_SIDs.end();
 	if (isSIDInvalid) {
 		throw "ERROR: There was an issue with the SID passed to updateSIDs in CPosition Class (the SID was not found in the map)";
 	}
@@ -211,7 +211,7 @@ void CPosition::updateSIDs(std::string SIDKey) {
 */
 void CPosition::updateQNH(int newQNH) {
 	if (!isQNHValid(newQNH)) {
-		throw "ERROR: There was an issue with the new QNH passed to updateQNH in CPOsition Class";
+		throw "ERROR: There was an issue with the new QNH passed to updateQNH in CPOsition Class. The value passed to the method was " + newQNH;
 	}
 
 	m_QNH = newQNH;
@@ -224,7 +224,7 @@ void CPosition::updateQNH(int newQNH) {
 */
 void CPosition::updateCallsignSelected(std::string newCallsign) {
 	if (!isCallsignSelectedValid(newCallsign)) {
-		throw "ERROR: There was an issue with the newCallsign passed to updateCallsignSelected in CPosition Class";
+		throw "ERROR: There was an issue with the newCallsign passed to updateCallsignSelected in CPosition Class. The value passed to the method was " + newCallsign;
 	}
 
 	m_callsignSelected = newCallsign;
@@ -263,11 +263,11 @@ std::string getExtensionFromCallsign(std::string callsign) {
 	int callsignLength = callsign.length();
 	int expectedLength = indexOfUnderscore + 4;
 	if (indexOfUnderscore == -1) {
-		throw "ERROR: There was an issue finding an underscore in your callsign in getExtensionFromCallsign in CPosition class";
+		throw "ERROR: There was an issue finding an underscore in your callsign in getExtensionFromCallsign in CPosition class. The value passed to the method was " + callsign;
 	}
 
 	if (callsign.length != expectedLength) {
-		throw "ERROR: There was an issue with the length of the extension in getExtensionFromCallsign in CPosition class";
+		throw "ERROR: There was an issue with the length of the extension in getExtensionFromCallsign in CPosition class. The value passed to the method was " + callsign;
 	}
 
 	std::string extension = callsign.substr(indexOfUnderscore, 3);
@@ -378,7 +378,7 @@ bool isRunwayValid(std::string runway) {
 *
 * @return true if SIDs is valid and false otherwise
 */
-bool isSIDsValid(std::unordered_map<std::string, bool> SIDs) {
+bool isSIDsValid(std::unordered_map<std::string, bool> SIDs) {//------------------------------Implement me
 	return true;
 }
 
@@ -423,6 +423,9 @@ bool isCallsignSelectedValid(std::string callsignSelected) {
 void getRelevantAdjacentControllers(std::list<std::string> fullAdjacentControllers, std::string positionICAO) {
 	for (std::string controller : fullAdjacentControllers) {
 		std::string ICAO = getICAOFromCallsign(controller);
+		if (ICAO == "error") {
+			throw "There was an error with one of the callsigns in fullAdjacentControllers in getRelevantAdjacentControllers in CPosition class. THe callsign that caused the error was " + controller;
+		}
 		bool positionNotValid = ICAO != positionICAO && ICAO != "LON" && ICAO != "SCO" && ICAO != "LTC" && ICAO != "MAN" && ICAO != "STC";
 
 		if (positionNotValid) {
@@ -447,7 +450,7 @@ void getRelevantAdjacentControllers(std::list<std::string> fullAdjacentControlle
 std::string getICAOFromCallsign(std::string controller) {
 	int indexOfUnderscore = controller.find_first_of("_");
 	if (indexOfUnderscore == -1) {
-		throw "ERROR: couldn't find an underscore in getICAOFromCallsign in CPosition class";
+		return "error";
 	}
 	int lengthOfICAO = indexOfUnderscore - 1;
 	std::string ICAO = controller.substr(0, lengthOfICAO);
