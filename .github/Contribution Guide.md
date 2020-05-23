@@ -11,6 +11,11 @@
 * Make your changes following the structure and documentation guide.
 * When commiting your changed make it in line with your saving or when you add an important thing, using a good naming convention.
 * Push your commits to your own fork, at least once a day.
+* Make sure that you test any changes you have made and if needed add screenshots of the working version to the pull request.
+* Once finished request a review of the pull request, if able ask the person who made the original issue.
+* If further changes are requested don't be disheartened this is normal is software development.
+* Once these have been done request another review.
+* Once both parties are happy the changes the pull request will get the testing label
 
 
 Thanks for showing interest and help with the development. Any questions then ask in the DEVELOPERS section of the discord.
