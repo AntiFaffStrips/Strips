@@ -6,7 +6,19 @@
 const int C_ASCII_A = 65;
 const int C_ASCII_Z = 91;
 
-//TODO: - Check if the callsign in callsign selected exists to a strip instance
+//TODO: - Check if the callsign in callsignSelected exists to a strip instance
+
+//helper function declarations
+bool isICAOValid(std::string ICAO);
+bool isBoxesValid(std::list<CBox> boxes);
+bool isAdjacentControllersValid(std::list<std::string> adjacentControllers);
+bool isAtisValid(char ATIS);
+bool isRunwayValid(std::string newRunway);
+bool isSIDsValid(std::unordered_map<std::string, bool> SIDs);
+bool isQNHValid(int qnh);
+bool isCallsignSelectedValid(std::string callsignSelected);
+void getRelevantAdjacentControllers(std::list<std::string> fullAdjacentControllers, std::string positionICAO);
+std::string getICAOFromCallsign(std::string controller);
 
 /**
 * Class Constructor
@@ -378,7 +390,7 @@ bool isRunwayValid(std::string runway) {
 *
 * @return true if SIDs is valid and false otherwise
 */
-bool isSIDsValid(std::unordered_map<std::string, bool> SIDs) {//------------------------------Implement me
+bool isSIDsValid(std::unordered_map<std::string, bool> SIDs) {
 	return true;
 }
 
