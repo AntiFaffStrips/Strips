@@ -8,6 +8,9 @@
 * **As far as the actual changes go. Please refer to this guide for documenting and structuring the code.** 
 * Firstly make sure that your master branch is the same version and is uptodate with the master branch of the main repo 
 * Once your changed have been commited to your master branch in your fork. Make a pull request that compares your branch for the issue with the master branch of the main repo. This should mean 1 pull request per issue. And make the request at the beginning so we can see every commit made.
+* Make your changes following the structure and documentation guide.
+* When commiting your changed make it in line with your saving or when you add an important thing, using a good naming convention.
+* Push your commits to your own fork, at least once a day.
 
 
 Thanks for showing interest and help with the development. Any questions then ask in the DEVELOPERS section of the discord.
