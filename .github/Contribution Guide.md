@@ -15,7 +15,10 @@
 * Once finished request a review of the pull request, if able ask the person who made the original issue.
 * If further changes are requested don't be disheartened this is normal is software development.
 * Once these have been done request another review.
-* Once both parties are happy the changes the pull request will get the testing label
+* Once both parties are happy the changes the pull request will get the testing label.
+* Then we will get a independent person to test the issue. Someone who has not worked on this issue before.
+* Once tested it will be either accepted fully, or more changes requested.
+* After being approved the lead devs will look at any merge conflicts and merge the request into master if all is good.  
 
 
 Thanks for showing interest and help with the development. Any questions then ask in the DEVELOPERS section of the discord.
