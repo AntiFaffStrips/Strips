@@ -272,13 +272,13 @@ bool isExtensionValid(std::string extension) {
 */
 std::string getExtensionFromCallsign(std::string callsign) {
 	int indexOfUnderscore = callsign.find_last_of("_");
-	int callsignLength = callsign.length();
-	int expectedLength = indexOfUnderscore + 4;
+	unsigned int callsignLength = callsign.length();
+	unsigned int expectedLength = indexOfUnderscore + 4;
 	if (indexOfUnderscore == -1) {
 		throw "ERROR: There was an issue finding an underscore in your callsign in getExtensionFromCallsign in CPosition class. The value passed to the method was " + callsign;
 	}
 
-	if (callsign.length != expectedLength) {
+	if (callsign.length() != expectedLength) {
 		throw "ERROR: There was an issue with the length of the extension in getExtensionFromCallsign in CPosition class. The value passed to the method was " + callsign;
 	}
 
@@ -311,7 +311,7 @@ bool isICAOValid(std::string ICAO) {
 * @return true if boxes is valid and false otherwise
 */
 bool isBoxesValid(std::list<CBox> boxes) {
-	if (boxes.size == 0) {
+	if (boxes.size() == 0) {
 		return false;
 	}
 
@@ -327,7 +327,7 @@ bool isBoxesValid(std::list<CBox> boxes) {
 */
 bool isAdjacentControllersValid(std::list<std::string> adjacentControllers) {
 	bool valid = true;
-	if (adjacentControllers.size == 0) {
+	if (adjacentControllers.size() == 0) {
 		return false;
 	}
 
@@ -368,12 +368,12 @@ bool isAtisValid(char ATIS) {
 * @return boolean which is true if the runway is valid and false otherwise
 */
 bool isRunwayValid(std::string runway) {
-	int runwayNums = std::stoi(runway.substr(0.2));
+	int runwayNums = std::stoi(runway.substr(0, 2));
 	if (runwayNums < 1 || runwayNums > 36) {
 		return false;
 	}
 
-	if (runway.length >= 4) {
+	if (runway.length() >= 4) {
 		std::string suffix = runway.substr(2, 1);
 		if (suffix != "L" && suffix != "R") {
 			return false;

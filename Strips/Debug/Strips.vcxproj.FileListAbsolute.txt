@@ -1,2 +1,4 @@
 D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.dll
 D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.pdb
+D:\Dev\Strips\Strips\Debug\Strips.dll
+D:\Dev\Strips\Strips\Debug\Strips.pdb
