@@ -1,2 +1,8 @@
-﻿  CEuroScopeUtils.cpp
-  Strips.vcxproj -> D:\Users\JAF\Local Storage\GitHub\repos\Strips\Strips\Debug\Strips.dll
+﻿  pch.cpp
+  CBox.cpp
+  CEuroScopeUtils.cpp
+  CPosition.cpp
+  dllmain.cpp
+  Generating Code...
+     Creating library D:\Dev\Strips\Strips\Debug\Strips.lib and object D:\Dev\Strips\Strips\Debug\Strips.exp
+  Strips.vcxproj -> D:\Dev\Strips\Strips\Debug\Strips.dll

@@ -27,6 +27,12 @@
     <ClInclude Include="lib\include\EuroScopePlugIn.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CPosition.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -36,6 +42,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CEuroScopeUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CPosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
